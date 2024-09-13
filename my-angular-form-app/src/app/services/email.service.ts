@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class EmailService {
   private emailUrl = 'https://api.mailgunner.com/v3/sandboxbef650489a0c405d9de00044d65961e1/messages';  
 
-  private apiKey = 'bba84055b8dcc0a41268a90d3c531060-826eddfb-5cefebff'; 
+  private apiKey = 'xxxx-826eddfb-5cefebff'; 
 
   constructor(private http: HttpClient) {}
 
