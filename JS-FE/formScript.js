@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 email: document.getElementById('email').value,
                 cardNumber: document.getElementById('cardNumber').value
             };
-
+            //send to back in for checking and storing, then send email
             postSubmitForm(formData)
             .catch(error => console.error('Error submitting form', error));
             emailjs.sendForm(userid, templateid, form)

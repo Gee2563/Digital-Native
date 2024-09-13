@@ -1,8 +1,22 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { validName, validEmail, validCreditCard } from '../utils/formValidation';
 import { postForm } from '../services/FormServices';
 import { sendEmail } from '../services/mailgunServices';
+import DOMPurify from 'dompurify'; // For sanitizing HTML content, if needed
 
+// Function to escape user input (if needed for custom scenarios)
+const escapeHTML = (str: string) => {
+    return str.replace(/[&<>"']/g, (match) => {
+        const escapeMap: { [key: string]: string } = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        };
+        return escapeMap[match];
+    });
+};
 
 const FormComponent: React.FC = () => {
     const [name, setName] = useState('');
@@ -18,10 +32,7 @@ const FormComponent: React.FC = () => {
         }));
     };
 
-    useEffect(() => {
-        validateField(name, validName, 'name');
-
-    }, [name]);
+    
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
@@ -31,15 +42,21 @@ const FormComponent: React.FC = () => {
         const cardError = validCreditCard(cardNumber);
 
         if (nameError === true && emailError === true && cardError === true) {
-            // Submit form logic
+            // Escape user inputs before sending
+            const escapedName = escapeHTML(name);
+            const escapedEmail = escapeHTML(email);
+            const escapedCardNumber = escapeHTML(cardNumber);
+
             const formData = new FormData();
-            formData.append('name', name);
-            formData.append('email', email);
-            formData.append('cardNumber', cardNumber);
+            formData.append('name', escapedName);
+            formData.append('email', escapedEmail);
+            formData.append('cardNumber', escapedCardNumber);
+
             postForm(formData)
                 .then(response => {
                     if (response.ok) {
                         alert('Form submitted successfully');
+                        sendEmail(formData);
                     } else {
                         alert('Form submission failed');
                     }
@@ -48,9 +65,8 @@ const FormComponent: React.FC = () => {
                     console.error('Error:', error);
                     alert('Form submission failed');
                 });
-            sendEmail(formData);
 
-
+           
         } else {
             setErrors({
                 name: nameError === true ? '' : nameError as string,
@@ -59,6 +75,7 @@ const FormComponent: React.FC = () => {
             });
         }
     };
+
 
     return (
         <>

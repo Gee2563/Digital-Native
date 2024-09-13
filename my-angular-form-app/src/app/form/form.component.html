@@ -1,0 +1,60 @@
+<div class="form-container">
+  <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+    <div class="error-messages">
+      <ul>
+        <li id="nameError" class="error" *ngIf="showErrors && validateName(myForm.value.name)">{{ validateName(myForm.value.name) }}</li>
+        <li id="emailError" class="error" *ngIf="showErrors && validateEmail(myForm.value.email)">{{ validateEmail(myForm.value.email) }}</li>
+        <li id="cardNumberError" class="error" *ngIf="showErrors && validateCardNumber(myForm.value.cardNumber)">{{ validateCardNumber(myForm.value.cardNumber) }}</li>
+      </ul>
+    </div>
+    
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input
+        placeholder="Enter your name"
+        id="name"
+        name="name"
+        ngModel
+        (ngModelChange)="validateField('name', $event)"
+        #name="ngModel"
+        required
+        minlength="3"
+        maxlength="50"
+        class="formInput"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input
+        placeholder="Enter your email"
+        id="email"
+        name="email"
+        ngModel
+        (ngModelChange)="validateField('email', $event)"
+        #email="ngModel"
+        required
+        email
+        class="formInput"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="cardNumber">Card:</label>
+      <input
+        placeholder="Enter a Proxy Credit Card Number."
+        id="cardNumber"
+        name="cardNumber"
+        ngModel
+        (ngModelChange)="validateField('cardNumber', $event)"
+        #cardNumber="ngModel"
+        required
+        minlength="16"
+        maxlength="16"
+        class="formInput"
+      />
+    </div>
+
+    <button type="submit" class="submit-btn" [disabled]="myForm.invalid">Submit</button>
+  </form>
+</div>

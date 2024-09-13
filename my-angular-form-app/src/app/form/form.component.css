@@ -1,0 +1,69 @@
+.form-container {
+  background-color: rgb(137, 200, 46);
+  padding: 10px; /* Padding around content */
+  border-radius: 15px; /* Rounded corners */
+  border: 5px solid rgb(60, 60, 59); /* Green border */
+  min-width: 50vh; /* Minimum width of the container */
+  max-width: 90vh; /* Maximum width of the container */
+  max-height: 80vh; 
+}
+
+.submit-btn {
+  background-color: rgb(231, 0, 100);
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid black;
+  text-decoration: black;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  flex: 0 0 auto;
+  margin-right: 5px;
+}
+
+.formInput {
+  padding: 5px;
+  border-radius: 5px;
+  border-style: hidden;
+  flex: 1;
+  color: rgb(231, 0, 100);
+}
+
+.myForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error-messages li {
+  color: rgb(231, 0, 100);
+  list-style-type: none;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.error-messages ul {
+  padding: 0;
+}
+
+.formInput.invalid {
+  border: 1px solid rgb(231, 0, 100); /* Red color for invalid */
+  color: rgb(231, 0, 100); /* Red text color */
+}
+
+.formInput.valid {
+  border: 1px solid rgb(137, 189, 36); /* Green color for valid */
+  color: rgb(137, 189, 36); /* Green text color */
+}
+
+button:disabled {
+  color: black;
+}

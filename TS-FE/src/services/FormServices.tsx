@@ -23,7 +23,7 @@ try {
 }
 }
 
-
+// This function is not in use - I am using mailgunServices.tsx instead. I have kept this function for future feat: have a backup email service
 export const sendEmail = (formData: { [key: string]: string }) => {
     const serviceID = process.env.REACT_APP_EMAILJS_SERVICE_ID!;
     const templateID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID!;
